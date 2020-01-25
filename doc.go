@@ -26,14 +26,14 @@
 //		)
 //
 //		func main() {
-//		    // date of birth
+//			// date of birth
 //			dob := time.Date(1970, time.January, 1, 0, 0, 0, 0, time.UTC)
-//    		// passport number
-//		    passport := "123456P"
-//		    // country code
-//		    cc := "AUS"
-//	    	// visa grant number or transaction reference number
-//		    vgn := "1234567891011"
+//			// passport number
+//			passport := "123456P"
+//			// country code
+//			cc := "AUS"
+//			// visa grant number or transaction reference number
+//			vgn := "1234567891011"
 //			v := vevo.NewVEVO(dob, passport, cc, vgn)
 //			visa, err := v.Visa()
 //			if err != nil {
