@@ -35,19 +35,19 @@ import (
 
 func main() {
     // date of birth
-	dob := time.Date(1970, time.January, 1, 0, 0, 0, 0, time.UTC)
+    dob := time.Date(1970, time.January, 1, 0, 0, 0, 0, time.UTC)
     // passport number
     passport := "123456P"
     // country code
     cc := "AUS"
     // visa grant number or transaction reference number
     vgn := "1234567891011"
-	v := vevo.NewVEVO(dob, passport, cc, vgn)
-	visa, err := v.Visa()
-	if err != nil {
-		log.Fatal(err)
-	}
+    v := vevo.NewVEVO(dob, passport, cc, vgn)
+    visa, err := v.Visa()
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	fmt.Printf("%+v\n", visa)
+    fmt.Printf("%+v\n", visa)
 }
 ```
