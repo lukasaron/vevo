@@ -2,7 +2,7 @@ package vevo
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -38,19 +38,18 @@ func NewVEVO(dob time.Time, passport, countryCode, visaNumber string) VEVO {
 
 // Visa method handles the connection to the immigration department (government) and returns the Visa and/or error.
 func (v VEVO) Visa() (Visa, error) {
-	visa := Visa{}
+	var visa Visa
 	resp, err := http.Get(v.prepareURL())
 	if err != nil {
 		return visa, err
 	}
+	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	_ = resp.Body.Close()
-	if err != nil {
-		return visa, err
+	if resp.StatusCode != http.StatusOK {
+		return visa, fmt.Errorf("HTTP call failed: %s", resp.Status)
 	}
 
-	return visa, json.Unmarshal(body, &visa)
+	return visa, json.NewDecoder(resp.Body).Decode(&visa)
 }
 
 // Visa is the response expected from the immigration server.
